@@ -1,4 +1,8 @@
 #include "binary.h"
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
 int valorLDR;
 int val = 0;
@@ -16,6 +20,11 @@ int inPin = 13;
 
 void setup() {
   // put your setup code here, to run once:
+
+  lcd.begin(16,2);
+  lcd.clear();
+  delay(3000);
+  lcd.print("Viejo Lesbiano");
   
   pinMode(pinled1, OUTPUT);
   pinMode(pinled2, OUTPUT);
@@ -109,5 +118,3 @@ switch(val){
 }
 
 }
-
-   
