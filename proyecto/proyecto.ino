@@ -16,15 +16,31 @@ int pinled5 = 8;
 int pinLDR = A0;
 int inPin = 13;
 
+void mensaje(String mens){
+//comandos para mensaje en pantalla
+  lcd.begin(16,2);
+  lcd.home();
+  //lcd.clear();
+  lcd.print("Lazo Cerrado");
+  lcd.setCursor(0,1);
+  lcd.print(""+String(mens)); 
+  delay(1000);
+}
 
+void mensajeAbierto(String mensaj){
+//comandos para mensaje en pantalla
+  lcd.begin(16,2);
+  lcd.home();
+  //lcd.clear();
+  lcd.print("Lazo Abierto");
+  lcd.setCursor(0,1);
+  lcd.print(""+String(mensaj)); 
+  delay(1000);
+}
 
 void setup() {
   // put your setup code here, to run once:
 
-  lcd.begin(16,2);
-  lcd.clear();
-  delay(3000);
-  lcd.print("Viejo Lesbiano");
   
   pinMode(pinled1, OUTPUT);
   pinMode(pinled2, OUTPUT);
@@ -51,7 +67,10 @@ val = digitalRead(inPin);
 
 switch(val){
   case 1:
+
+  
     if (valorLDR >= 1023 ){
+    mensaje("Val>: "+String(valorLDR)+" Ohms");
     digitalWrite(pinled1, LOW);
     digitalWrite(pinled2, LOW);
     digitalWrite(pinled3, LOW);
@@ -60,6 +79,7 @@ switch(val){
   }
 
   else if((valorLDR >= 823) & (valorLDR < 1023)){
+    mensaje("Val>823 & <1023 Ohms");
     digitalWrite(pinled1, HIGH);
     digitalWrite(pinled2, LOW);
     digitalWrite(pinled3, LOW);
@@ -68,6 +88,7 @@ switch(val){
   }
 
   else if((valorLDR >= 623) & (valorLDR < 823)){
+    mensaje("Val>623 & <823 Ohms");
     digitalWrite(pinled1, HIGH);
     digitalWrite(pinled2, HIGH);
     digitalWrite(pinled3, LOW);
@@ -76,6 +97,7 @@ switch(val){
   }
 
   else if((valorLDR >= 423) & (valorLDR < 623)){
+    mensaje("Val>423 & <623 Ohms");
     digitalWrite(pinled1, HIGH);
     digitalWrite(pinled2, HIGH);
     digitalWrite(pinled3, HIGH);
@@ -84,6 +106,7 @@ switch(val){
   }
 
   else if((valorLDR >= 223) & (valorLDR < 423)){
+    mensaje("Val>223 & <423 Ohms");
     digitalWrite(pinled1, HIGH);
     digitalWrite(pinled2, HIGH);
     digitalWrite(pinled3, HIGH);
@@ -92,6 +115,7 @@ switch(val){
   }
 
   else{
+    mensaje("Val< 223 Ohms");
     digitalWrite(pinled1, HIGH);
     digitalWrite(pinled2, HIGH);
     digitalWrite(pinled3, HIGH);
@@ -101,6 +125,7 @@ switch(val){
   break;
   case 0:
   if (valorLDR >= 623){
+    mensajeAbierto("Val>: "+String(valorLDR)+" Ohms");
     digitalWrite(pinled1, LOW);
     digitalWrite(pinled2, LOW);
     digitalWrite(pinled3, LOW);
@@ -108,6 +133,7 @@ switch(val){
     digitalWrite(pinled5, LOW);
   }
   else{
+    mensajeAbierto("Val<: "+String(valorLDR)+" Ohms");
     digitalWrite(pinled1, HIGH);
     digitalWrite(pinled2, HIGH);
     digitalWrite(pinled3, HIGH);
@@ -118,3 +144,5 @@ switch(val){
 }
 
 }
+
+   
